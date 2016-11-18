@@ -13,6 +13,7 @@ _*.ipdb
 _*.pyd
 gn-routing/*.py
 gn-routing/*.lib
+gn-routing/*.exp
 lib/*.py
 
 # User-specific files
