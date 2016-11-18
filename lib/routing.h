@@ -1,3 +1,7 @@
+#pragma once
+
+#include "graph.h"
+
 class routing
 {
 private:
@@ -8,6 +12,5 @@ public:
 	routing() : _counter{0} {};
 	~routing() {};
 
-	void inc();
-	int counter();
+	Graph createGraph();
 };

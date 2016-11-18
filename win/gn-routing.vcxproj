@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\lib\graph.h" />
     <ClInclude Include="..\lib\routing.h" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +34,7 @@ swig.exe -c++ -python "%(FullPath)"</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\lib\graph.cpp" />
     <ClCompile Include="..\lib\routing.cpp" />
     <ClCompile Include="..\lib\routing_wrap.cxx" />
   </ItemGroup>
@@ -124,6 +126,9 @@ swig.exe -c++ -python "%(FullPath)"</Command>
 xcopy /Y gn-routing.lib ..\bin
 xcopy /Y ..\lib\routing.py ..\bin</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del /Q ..\bin\*.*</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

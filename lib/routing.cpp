@@ -1,12 +1,7 @@
 #include "routing.h"
 
 
-void routing::inc()
+Graph routing::createGraph()
 {
-	_counter++;
-}
-
-int routing::counter()
-{
-	return _counter;
+	return Graph();
 }
