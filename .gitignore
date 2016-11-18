@@ -7,6 +7,14 @@
 swigwin.zip
 swigwin-*/
 
+# Swig results
+_*.iobj
+_*.ipdb
+_*.pyd
+gn-routing/*.py
+gn-routing/*.lib
+lib/*.py
+
 # User-specific files
 *.suo
 *.user
