@@ -11,9 +11,9 @@ swigwin-*/
 _*.iobj
 _*.ipdb
 _*.pyd
-gn-routing/*.py
-gn-routing/*.lib
-gn-routing/*.exp
+win/*.py
+win/*.lib
+win/*.exp
 lib/*.py
 
 # User-specific files
