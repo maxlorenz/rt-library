@@ -2,44 +2,36 @@
 
 #include <map>
 #include <vector>
-#include <memory>
 
-struct Node
+struct Edge
+{
+	double distance;
+	Vertex & target;
+};
+
+struct Vertex
 {
 	int id;
-	int lat;
+
 	int lon;
+	int lat;
 
-	std::map<std::string, std::string> tags;
-};
-
-struct Way
-{
-	int id;
-
-	std::vector<int> nodes;
-	std::map<std::string, std::string> tags; 
-};
-
-struct Vertice
-{
-	int id;
-	std::vector<Vertice *> connected;
+	std::vector<Edge> edges;
 };
 
 class Graph
 {
 private:
-	std::map<int, Node> nodes;
-	std::map<int, Way> ways;
+	std::map<int, Vertex> vertices;
+	std::vector<std::vector<int>> edges;
 
 public:
 	Graph();
 	~Graph();
 
-	void addNode(int id, int lat, int lon);
-	void addWay(int id, std::vector<int> node_ids);
+	void insert_node(int id, int lat, int lon);
+	void insert_way(std::vector<int> node_ids);
 
-	Vertice create();
+	Vertex get_vertex(int id);
 };
 

@@ -10,18 +10,17 @@ Graph::~Graph()
 {
 }
 
-void Graph::addNode(int id, int lat, int lon)
+void Graph::insert_node(int id, int lat, int lon)
 {
-	nodes.insert(std::pair<int, Node>(id, Node { id, lat, lon }));
+	vertices.at(id) = Vertex { id, lat, lon };
 }
 
-void Graph::addWay(int id, std::vector<int> node_ids)
+void Graph::insert_way(std::vector<int> node_ids)
 {
-	ways.insert(std::pair<int, Way>(id, Way{ id, node_ids }));
+	edges.push_back(node_ids);
 }
 
-Vertice Graph::create()
+Vertex Graph::get_vertex(int id)
 {
-	// TODO create Graph structure based on nodes and ways
-	return Vertice();
+	return vertices.find(id);
 }
