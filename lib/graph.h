@@ -3,12 +3,6 @@
 #include <map>
 #include <vector>
 
-struct Edge
-{
-	double distance;
-	Vertex & target;
-};
-
 struct Vertex
 {
 	int id;
@@ -16,8 +10,15 @@ struct Vertex
 	int lon;
 	int lat;
 
+	struct Edge
+	{
+		double distance;
+		Vertex * target;
+	};
+
 	std::vector<Edge> edges;
 };
+
 
 class Graph
 {
@@ -26,8 +27,8 @@ private:
 	std::vector<std::vector<int>> edges;
 
 public:
-	Graph();
-	~Graph();
+	Graph() {}
+	~Graph() {}
 
 	void insert_node(int id, int lat, int lon);
 	void insert_way(std::vector<int> node_ids);

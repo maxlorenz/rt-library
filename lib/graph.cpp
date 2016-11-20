@@ -1,14 +1,6 @@
+#include <iostream>
+
 #include "graph.h"
-
-
-Graph::Graph()
-{
-}
-
-
-Graph::~Graph()
-{
-}
 
 void Graph::insert_node(int id, int lat, int lon)
 {
@@ -23,4 +15,9 @@ void Graph::insert_way(std::vector<int> node_ids)
 Vertex Graph::get_vertex(int id)
 {
 	return vertices.find(id);
+}
+
+int main()
+{
+	std::cout << "Hello, world" << "\n";
 }
