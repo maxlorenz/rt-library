@@ -34,5 +34,9 @@ public:
 	void insert_way(std::vector<int> node_ids);
 
 	Vertex get_vertex(int id);
+
+private:
+	void connect(int from_id, int to_id);
+	double distance(const Vertex* from, const Vertex* to);
 };
 
