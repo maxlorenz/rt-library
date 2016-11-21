@@ -3007,19 +3007,17 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_Graph swig_types[0]
-#define SWIGTYPE_p_Node swig_types[1]
-#define SWIGTYPE_p_Vertice swig_types[2]
-#define SWIGTYPE_p_Way swig_types[3]
-#define SWIGTYPE_p_char swig_types[4]
-#define SWIGTYPE_p_routing swig_types[5]
-#define SWIGTYPE_p_std__invalid_argument swig_types[6]
-#define SWIGTYPE_p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t swig_types[7]
-#define SWIGTYPE_p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t swig_types[8]
-#define SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t swig_types[9]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[10]
-static swig_type_info *swig_types[12];
-static swig_module_info swig_module = {swig_types, 11, 0, 0, 0, 0};
+#define SWIGTYPE_p_Edge swig_types[0]
+#define SWIGTYPE_p_Graph swig_types[1]
+#define SWIGTYPE_p_Vertex swig_types[2]
+#define SWIGTYPE_p_char swig_types[3]
+#define SWIGTYPE_p_routing swig_types[4]
+#define SWIGTYPE_p_std__invalid_argument swig_types[5]
+#define SWIGTYPE_p_std__vectorT_Edge_std__allocatorT_Edge_t_t swig_types[6]
+#define SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t swig_types[7]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[8]
+static swig_type_info *swig_types[10];
+static swig_module_info swig_module = {swig_types, 9, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3638,6 +3636,9 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 
 
 #include <vector>
+
+
+  #define SWIG_From_double   PyFloat_FromDouble 
 
 
 SWIGINTERN int
@@ -4515,9 +4516,157 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_Node_id_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Edge_distance_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
+  Edge *arg1 = (Edge *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Edge_distance_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Edge, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Edge_distance_set" "', argument " "1"" of type '" "Edge *""'"); 
+  }
+  arg1 = reinterpret_cast< Edge * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Edge_distance_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  if (arg1) (arg1)->distance = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Edge_distance_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Edge *arg1 = (Edge *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Edge_distance_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Edge, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Edge_distance_get" "', argument " "1"" of type '" "Edge *""'"); 
+  }
+  arg1 = reinterpret_cast< Edge * >(argp1);
+  result = (double) ((arg1)->distance);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Edge_target_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Edge *arg1 = (Edge *) 0 ;
+  Vertex *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Edge_target_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Edge, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Edge_target_set" "', argument " "1"" of type '" "Edge *""'"); 
+  }
+  arg1 = reinterpret_cast< Edge * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Vertex,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Edge_target_set" "', argument " "2"" of type '" "Vertex &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Edge_target_set" "', argument " "2"" of type '" "Vertex &""'"); 
+  }
+  arg2 = reinterpret_cast< Vertex * >(argp2);
+  if (arg1) (arg1)->target = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Edge_target_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Edge *arg1 = (Edge *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Vertex *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Edge_target_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Edge, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Edge_target_get" "', argument " "1"" of type '" "Edge *""'"); 
+  }
+  arg1 = reinterpret_cast< Edge * >(argp1);
+  result = (Vertex *) &(Vertex &) ((arg1)->target);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Vertex, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Edge(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Edge *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_Edge")) SWIG_fail;
+  result = (Edge *)new Edge();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Edge, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Edge(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Edge *arg1 = (Edge *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_Edge",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Edge, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Edge" "', argument " "1"" of type '" "Edge *""'"); 
+  }
+  arg1 = reinterpret_cast< Edge * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Edge_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Edge, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_Vertex_id_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Vertex *arg1 = (Vertex *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4526,15 +4675,15 @@ SWIGINTERN PyObject *_wrap_Node_id_set(PyObject *SWIGUNUSEDPARM(self), PyObject 
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Node_id_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:Vertex_id_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Node_id_set" "', argument " "1"" of type '" "Node *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertex_id_set" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Node * >(argp1);
+  arg1 = reinterpret_cast< Vertex * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Node_id_set" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vertex_id_set" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
   if (arg1) (arg1)->id = arg2;
@@ -4545,20 +4694,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Node_id_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vertex_id_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
+  Vertex *arg1 = (Vertex *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Node_id_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:Vertex_id_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Node_id_get" "', argument " "1"" of type '" "Node *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertex_id_get" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Node * >(argp1);
+  arg1 = reinterpret_cast< Vertex * >(argp1);
   result = (int) ((arg1)->id);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
@@ -4567,9 +4716,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Node_lat_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vertex_lon_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
+  Vertex *arg1 = (Vertex *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4578,67 +4727,15 @@ SWIGINTERN PyObject *_wrap_Node_lat_set(PyObject *SWIGUNUSEDPARM(self), PyObject
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Node_lat_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:Vertex_lon_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Node_lat_set" "', argument " "1"" of type '" "Node *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertex_lon_set" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Node * >(argp1);
+  arg1 = reinterpret_cast< Vertex * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Node_lat_set" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->lat = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Node_lat_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Node_lat_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Node_lat_get" "', argument " "1"" of type '" "Node *""'"); 
-  }
-  arg1 = reinterpret_cast< Node * >(argp1);
-  result = (int) ((arg1)->lat);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Node_lon_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Node_lon_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Node_lon_set" "', argument " "1"" of type '" "Node *""'"); 
-  }
-  arg1 = reinterpret_cast< Node * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Node_lon_set" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vertex_lon_set" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
   if (arg1) (arg1)->lon = arg2;
@@ -4649,20 +4746,20 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Node_lon_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vertex_lon_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
+  Vertex *arg1 = (Vertex *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Node_lon_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:Vertex_lon_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Node_lon_get" "', argument " "1"" of type '" "Node *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertex_lon_get" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Node * >(argp1);
+  arg1 = reinterpret_cast< Vertex * >(argp1);
   result = (int) ((arg1)->lon);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
@@ -4671,102 +4768,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Node_tags_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vertex_lat_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
-  std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *arg2 = (std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Node_tags_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Node_tags_set" "', argument " "1"" of type '" "Node *""'"); 
-  }
-  arg1 = reinterpret_cast< Node * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Node_tags_set" "', argument " "2"" of type '" "std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *""'"); 
-  }
-  arg2 = reinterpret_cast< std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > * >(argp2);
-  if (arg1) (arg1)->tags = *arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Node_tags_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Node_tags_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Node_tags_get" "', argument " "1"" of type '" "Node *""'"); 
-  }
-  arg1 = reinterpret_cast< Node * >(argp1);
-  result = (std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *)& ((arg1)->tags);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Node(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Node *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_Node")) SWIG_fail;
-  result = (Node *)new Node();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Node, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_Node(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Node *arg1 = (Node *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Node",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Node, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Node" "', argument " "1"" of type '" "Node *""'"); 
-  }
-  arg1 = reinterpret_cast< Node * >(argp1);
-  delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *Node_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Node, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *_wrap_Way_id_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Way *arg1 = (Way *) 0 ;
+  Vertex *arg1 = (Vertex *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4775,18 +4779,18 @@ SWIGINTERN PyObject *_wrap_Way_id_set(PyObject *SWIGUNUSEDPARM(self), PyObject *
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Way_id_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Way, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:Vertex_lat_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Way_id_set" "', argument " "1"" of type '" "Way *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertex_lat_set" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Way * >(argp1);
+  arg1 = reinterpret_cast< Vertex * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Way_id_set" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vertex_lat_set" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->id = arg2;
+  if (arg1) (arg1)->lat = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4794,21 +4798,21 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Way_id_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vertex_lat_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Way *arg1 = (Way *) 0 ;
+  Vertex *arg1 = (Vertex *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Way_id_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Way, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:Vertex_lat_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Way_id_get" "', argument " "1"" of type '" "Way *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertex_lat_get" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Way * >(argp1);
-  result = (int) ((arg1)->id);
+  arg1 = reinterpret_cast< Vertex * >(argp1);
+  result = (int) ((arg1)->lat);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -4816,10 +4820,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Way_nodes_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vertex_edges_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Way *arg1 = (Way *) 0 ;
-  std::vector< int,std::allocator< int > > *arg2 = (std::vector< int,std::allocator< int > > *) 0 ;
+  Vertex *arg1 = (Vertex *) 0 ;
+  std::vector< Edge,std::allocator< Edge > > *arg2 = (std::vector< Edge,std::allocator< Edge > > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -4827,18 +4831,18 @@ SWIGINTERN PyObject *_wrap_Way_nodes_set(PyObject *SWIGUNUSEDPARM(self), PyObjec
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Way_nodes_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Way, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"OO:Vertex_edges_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Way_nodes_set" "', argument " "1"" of type '" "Way *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertex_edges_set" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Way * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t, 0 |  0 );
+  arg1 = reinterpret_cast< Vertex * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_std__vectorT_Edge_std__allocatorT_Edge_t_t, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Way_nodes_set" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vertex_edges_set" "', argument " "2"" of type '" "std::vector< Edge,std::allocator< Edge > > *""'"); 
   }
-  arg2 = reinterpret_cast< std::vector< int,std::allocator< int > > * >(argp2);
-  if (arg1) (arg1)->nodes = *arg2;
+  arg2 = reinterpret_cast< std::vector< Edge,std::allocator< Edge > > * >(argp2);
+  if (arg1) (arg1)->edges = *arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -4846,106 +4850,54 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Way_nodes_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Vertex_edges_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Way *arg1 = (Way *) 0 ;
+  Vertex *arg1 = (Vertex *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::vector< int,std::allocator< int > > *result = 0 ;
+  std::vector< Edge,std::allocator< Edge > > *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Way_nodes_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Way, 0 |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:Vertex_edges_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Way_nodes_get" "', argument " "1"" of type '" "Way *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertex_edges_get" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Way * >(argp1);
-  result = (std::vector< int,std::allocator< int > > *)& ((arg1)->nodes);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t, 0 |  0 );
+  arg1 = reinterpret_cast< Vertex * >(argp1);
+  result = (std::vector< Edge,std::allocator< Edge > > *)& ((arg1)->edges);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_Edge_std__allocatorT_Edge_t_t, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Way_tags_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Vertex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Way *arg1 = (Way *) 0 ;
-  std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *arg2 = (std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
+  Vertex *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Way_tags_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Way, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Way_tags_set" "', argument " "1"" of type '" "Way *""'"); 
-  }
-  arg1 = reinterpret_cast< Way * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Way_tags_set" "', argument " "2"" of type '" "std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *""'"); 
-  }
-  arg2 = reinterpret_cast< std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > * >(argp2);
-  if (arg1) (arg1)->tags = *arg2;
-  resultobj = SWIG_Py_Void();
+  if (!PyArg_ParseTuple(args,(char *)":new_Vertex")) SWIG_fail;
+  result = (Vertex *)new Vertex();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Vertex, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Way_tags_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_Vertex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Way *arg1 = (Way *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Way_tags_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Way, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Way_tags_get" "', argument " "1"" of type '" "Way *""'"); 
-  }
-  arg1 = reinterpret_cast< Way * >(argp1);
-  result = (std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *)& ((arg1)->tags);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Way(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Way *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_Way")) SWIG_fail;
-  result = (Way *)new Way();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Way, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_Way(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Way *arg1 = (Way *) 0 ;
+  Vertex *arg1 = (Vertex *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Way",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Way, SWIG_POINTER_DISOWN |  0 );
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_Vertex",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertex, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Way" "', argument " "1"" of type '" "Way *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Vertex" "', argument " "1"" of type '" "Vertex *""'"); 
   }
-  arg1 = reinterpret_cast< Way * >(argp1);
+  arg1 = reinterpret_cast< Vertex * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -4954,155 +4906,10 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Way_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *Vertex_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Way, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
-SWIGINTERN PyObject *_wrap_Vertice_id_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Vertice *arg1 = (Vertice *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Vertice_id_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertice, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertice_id_set" "', argument " "1"" of type '" "Vertice *""'"); 
-  }
-  arg1 = reinterpret_cast< Vertice * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Vertice_id_set" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->id = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vertice_id_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Vertice *arg1 = (Vertice *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Vertice_id_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertice, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertice_id_get" "', argument " "1"" of type '" "Vertice *""'"); 
-  }
-  arg1 = reinterpret_cast< Vertice * >(argp1);
-  result = (int) ((arg1)->id);
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vertice_connected_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Vertice *arg1 = (Vertice *) 0 ;
-  std::vector< Vertice *,std::allocator< Vertice * > > *arg2 = (std::vector< Vertice *,std::allocator< Vertice * > > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Vertice_connected_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertice, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertice_connected_set" "', argument " "1"" of type '" "Vertice *""'"); 
-  }
-  arg1 = reinterpret_cast< Vertice * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Vertice_connected_set" "', argument " "2"" of type '" "std::vector< Vertice *,std::allocator< Vertice * > > *""'"); 
-  }
-  arg2 = reinterpret_cast< std::vector< Vertice *,std::allocator< Vertice * > > * >(argp2);
-  if (arg1) (arg1)->connected = *arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Vertice_connected_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Vertice *arg1 = (Vertice *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  std::vector< Vertice *,std::allocator< Vertice * > > *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Vertice_connected_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertice, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Vertice_connected_get" "', argument " "1"" of type '" "Vertice *""'"); 
-  }
-  arg1 = reinterpret_cast< Vertice * >(argp1);
-  result = (std::vector< Vertice *,std::allocator< Vertice * > > *)& ((arg1)->connected);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t, 0 |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Vertice(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Vertice *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_Vertice")) SWIG_fail;
-  result = (Vertice *)new Vertice();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Vertice, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_Vertice(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Vertice *arg1 = (Vertice *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Vertice",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Vertice, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Vertice" "', argument " "1"" of type '" "Vertice *""'"); 
-  }
-  arg1 = reinterpret_cast< Vertice * >(argp1);
-  delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *Vertice_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Vertice, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_Vertex, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -5140,7 +4947,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Graph_addNode(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Graph_insert_node(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Graph *arg1 = (Graph *) 0 ;
   int arg2 ;
@@ -5159,28 +4966,28 @@ SWIGINTERN PyObject *_wrap_Graph_addNode(PyObject *SWIGUNUSEDPARM(self), PyObjec
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOOO:Graph_addNode",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:Graph_insert_node",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Graph, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Graph_addNode" "', argument " "1"" of type '" "Graph *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Graph_insert_node" "', argument " "1"" of type '" "Graph *""'"); 
   }
   arg1 = reinterpret_cast< Graph * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Graph_addNode" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Graph_insert_node" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
   ecode3 = SWIG_AsVal_int(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Graph_addNode" "', argument " "3"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Graph_insert_node" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
   ecode4 = SWIG_AsVal_int(obj3, &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Graph_addNode" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Graph_insert_node" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  (arg1)->addNode(arg2,arg3,arg4);
+  (arg1)->insert_node(arg2,arg3,arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -5188,69 +4995,69 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Graph_addWay(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Graph_insert_way(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Graph *arg1 = (Graph *) 0 ;
+  SwigValueWrapper< std::vector< int,std::allocator< int > > > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Graph_insert_way",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Graph, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Graph_insert_way" "', argument " "1"" of type '" "Graph *""'"); 
+  }
+  arg1 = reinterpret_cast< Graph * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Graph_insert_way" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Graph_insert_way" "', argument " "2"" of type '" "std::vector< int,std::allocator< int > >""'");
+    } else {
+      std::vector< int,std::allocator< int > > * temp = reinterpret_cast< std::vector< int,std::allocator< int > > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->insert_way(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Graph_get_vertex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Graph *arg1 = (Graph *) 0 ;
   int arg2 ;
-  SwigValueWrapper< std::vector< int,std::allocator< int > > > arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
   int ecode2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
+  Vertex result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Graph_addWay",&obj0,&obj1,&obj2)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Graph_get_vertex",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Graph, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Graph_addWay" "', argument " "1"" of type '" "Graph *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Graph_get_vertex" "', argument " "1"" of type '" "Graph *""'"); 
   }
   arg1 = reinterpret_cast< Graph * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Graph_addWay" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Graph_get_vertex" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t,  0  | 0);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Graph_addWay" "', argument " "3"" of type '" "std::vector< int,std::allocator< int > >""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Graph_addWay" "', argument " "3"" of type '" "std::vector< int,std::allocator< int > >""'");
-    } else {
-      std::vector< int,std::allocator< int > > * temp = reinterpret_cast< std::vector< int,std::allocator< int > > * >(argp3);
-      arg3 = *temp;
-      if (SWIG_IsNewObj(res3)) delete temp;
-    }
-  }
-  (arg1)->addWay(arg2,arg3);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Graph_create(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Graph *arg1 = (Graph *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Vertice result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Graph_create",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Graph, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Graph_create" "', argument " "1"" of type '" "Graph *""'"); 
-  }
-  arg1 = reinterpret_cast< Graph * >(argp1);
-  result = (arg1)->create();
-  resultobj = SWIG_NewPointerObj((new Vertice(static_cast< const Vertice& >(result))), SWIGTYPE_p_Vertice, SWIG_POINTER_OWN |  0 );
+  result = (arg1)->get_vertex(arg2);
+  resultobj = SWIG_NewPointerObj((new Vertex(static_cast< const Vertex& >(result))), SWIGTYPE_p_Vertex, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5347,38 +5154,29 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"Node_id_set", _wrap_Node_id_set, METH_VARARGS, NULL},
-	 { (char *)"Node_id_get", _wrap_Node_id_get, METH_VARARGS, NULL},
-	 { (char *)"Node_lat_set", _wrap_Node_lat_set, METH_VARARGS, NULL},
-	 { (char *)"Node_lat_get", _wrap_Node_lat_get, METH_VARARGS, NULL},
-	 { (char *)"Node_lon_set", _wrap_Node_lon_set, METH_VARARGS, NULL},
-	 { (char *)"Node_lon_get", _wrap_Node_lon_get, METH_VARARGS, NULL},
-	 { (char *)"Node_tags_set", _wrap_Node_tags_set, METH_VARARGS, NULL},
-	 { (char *)"Node_tags_get", _wrap_Node_tags_get, METH_VARARGS, NULL},
-	 { (char *)"new_Node", _wrap_new_Node, METH_VARARGS, NULL},
-	 { (char *)"delete_Node", _wrap_delete_Node, METH_VARARGS, NULL},
-	 { (char *)"Node_swigregister", Node_swigregister, METH_VARARGS, NULL},
-	 { (char *)"Way_id_set", _wrap_Way_id_set, METH_VARARGS, NULL},
-	 { (char *)"Way_id_get", _wrap_Way_id_get, METH_VARARGS, NULL},
-	 { (char *)"Way_nodes_set", _wrap_Way_nodes_set, METH_VARARGS, NULL},
-	 { (char *)"Way_nodes_get", _wrap_Way_nodes_get, METH_VARARGS, NULL},
-	 { (char *)"Way_tags_set", _wrap_Way_tags_set, METH_VARARGS, NULL},
-	 { (char *)"Way_tags_get", _wrap_Way_tags_get, METH_VARARGS, NULL},
-	 { (char *)"new_Way", _wrap_new_Way, METH_VARARGS, NULL},
-	 { (char *)"delete_Way", _wrap_delete_Way, METH_VARARGS, NULL},
-	 { (char *)"Way_swigregister", Way_swigregister, METH_VARARGS, NULL},
-	 { (char *)"Vertice_id_set", _wrap_Vertice_id_set, METH_VARARGS, NULL},
-	 { (char *)"Vertice_id_get", _wrap_Vertice_id_get, METH_VARARGS, NULL},
-	 { (char *)"Vertice_connected_set", _wrap_Vertice_connected_set, METH_VARARGS, NULL},
-	 { (char *)"Vertice_connected_get", _wrap_Vertice_connected_get, METH_VARARGS, NULL},
-	 { (char *)"new_Vertice", _wrap_new_Vertice, METH_VARARGS, NULL},
-	 { (char *)"delete_Vertice", _wrap_delete_Vertice, METH_VARARGS, NULL},
-	 { (char *)"Vertice_swigregister", Vertice_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Edge_distance_set", _wrap_Edge_distance_set, METH_VARARGS, NULL},
+	 { (char *)"Edge_distance_get", _wrap_Edge_distance_get, METH_VARARGS, NULL},
+	 { (char *)"Edge_target_set", _wrap_Edge_target_set, METH_VARARGS, NULL},
+	 { (char *)"Edge_target_get", _wrap_Edge_target_get, METH_VARARGS, NULL},
+	 { (char *)"new_Edge", _wrap_new_Edge, METH_VARARGS, NULL},
+	 { (char *)"delete_Edge", _wrap_delete_Edge, METH_VARARGS, NULL},
+	 { (char *)"Edge_swigregister", Edge_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Vertex_id_set", _wrap_Vertex_id_set, METH_VARARGS, NULL},
+	 { (char *)"Vertex_id_get", _wrap_Vertex_id_get, METH_VARARGS, NULL},
+	 { (char *)"Vertex_lon_set", _wrap_Vertex_lon_set, METH_VARARGS, NULL},
+	 { (char *)"Vertex_lon_get", _wrap_Vertex_lon_get, METH_VARARGS, NULL},
+	 { (char *)"Vertex_lat_set", _wrap_Vertex_lat_set, METH_VARARGS, NULL},
+	 { (char *)"Vertex_lat_get", _wrap_Vertex_lat_get, METH_VARARGS, NULL},
+	 { (char *)"Vertex_edges_set", _wrap_Vertex_edges_set, METH_VARARGS, NULL},
+	 { (char *)"Vertex_edges_get", _wrap_Vertex_edges_get, METH_VARARGS, NULL},
+	 { (char *)"new_Vertex", _wrap_new_Vertex, METH_VARARGS, NULL},
+	 { (char *)"delete_Vertex", _wrap_delete_Vertex, METH_VARARGS, NULL},
+	 { (char *)"Vertex_swigregister", Vertex_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Graph", _wrap_new_Graph, METH_VARARGS, NULL},
 	 { (char *)"delete_Graph", _wrap_delete_Graph, METH_VARARGS, NULL},
-	 { (char *)"Graph_addNode", _wrap_Graph_addNode, METH_VARARGS, NULL},
-	 { (char *)"Graph_addWay", _wrap_Graph_addWay, METH_VARARGS, NULL},
-	 { (char *)"Graph_create", _wrap_Graph_create, METH_VARARGS, NULL},
+	 { (char *)"Graph_insert_node", _wrap_Graph_insert_node, METH_VARARGS, NULL},
+	 { (char *)"Graph_insert_way", _wrap_Graph_insert_way, METH_VARARGS, NULL},
+	 { (char *)"Graph_get_vertex", _wrap_Graph_get_vertex, METH_VARARGS, NULL},
 	 { (char *)"Graph_swigregister", Graph_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_routing", _wrap_new_routing, METH_VARARGS, NULL},
 	 { (char *)"delete_routing", _wrap_delete_routing, METH_VARARGS, NULL},
@@ -5390,54 +5188,46 @@ static PyMethodDef SwigMethods[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static swig_type_info _swigt__p_Edge = {"_p_Edge", "Edge *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Graph = {"_p_Graph", "Graph *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Node = {"_p_Node", "Node *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Vertice = {"_p_Vertice", "Vertice *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Way = {"_p_Way", "Way *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Vertex = {"_p_Vertex", "Vertex *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_routing = {"_p_routing", "routing *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t = {"_p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t", "std::map< std::string,std::string,std::less< std::string >,std::allocator< std::pair< std::string const,std::string > > > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t = {"_p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t", "std::vector< Vertice *,std::allocator< Vertice * > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_Edge_std__allocatorT_Edge_t_t = {"_p_std__vectorT_Edge_std__allocatorT_Edge_t_t", "std::vector< Edge,std::allocator< Edge > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_int_std__allocatorT_int_t_t = {"_p_std__vectorT_int_std__allocatorT_int_t_t", "std::vector< int,std::allocator< int > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_Edge,
   &_swigt__p_Graph,
-  &_swigt__p_Node,
-  &_swigt__p_Vertice,
-  &_swigt__p_Way,
+  &_swigt__p_Vertex,
   &_swigt__p_char,
   &_swigt__p_routing,
   &_swigt__p_std__invalid_argument,
-  &_swigt__p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t,
-  &_swigt__p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t,
+  &_swigt__p_std__vectorT_Edge_std__allocatorT_Edge_t_t,
   &_swigt__p_std__vectorT_int_std__allocatorT_int_t_t,
   &_swigt__p_swig__SwigPyIterator,
 };
 
+static swig_cast_info _swigc__p_Edge[] = {  {&_swigt__p_Edge, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Graph[] = {  {&_swigt__p_Graph, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Node[] = {  {&_swigt__p_Node, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Vertice[] = {  {&_swigt__p_Vertice, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Way[] = {  {&_swigt__p_Way, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Vertex[] = {  {&_swigt__p_Vertex, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_routing[] = {  {&_swigt__p_routing, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t[] = {  {&_swigt__p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t[] = {  {&_swigt__p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_Edge_std__allocatorT_Edge_t_t[] = {  {&_swigt__p_std__vectorT_Edge_std__allocatorT_Edge_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_int_std__allocatorT_int_t_t[] = {  {&_swigt__p_std__vectorT_int_std__allocatorT_int_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_Edge,
   _swigc__p_Graph,
-  _swigc__p_Node,
-  _swigc__p_Vertice,
-  _swigc__p_Way,
+  _swigc__p_Vertex,
   _swigc__p_char,
   _swigc__p_routing,
   _swigc__p_std__invalid_argument,
-  _swigc__p_std__mapT_std__string_std__string_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__string_t_t_t,
-  _swigc__p_std__vectorT_Vertice_p_std__allocatorT_Vertice_p_t_t,
+  _swigc__p_std__vectorT_Edge_std__allocatorT_Edge_t_t,
   _swigc__p_std__vectorT_int_std__allocatorT_int_t_t,
   _swigc__p_swig__SwigPyIterator,
 };

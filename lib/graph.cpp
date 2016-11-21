@@ -1,27 +1,39 @@
+#include <iostream>
+
 #include "graph.h"
 
-
-Graph::Graph()
+void Graph::insert_node(int id, int lat, int lon)
 {
+	vertices.at(id) = Vertex { id, lat, lon };
 }
 
-
-Graph::~Graph()
+void Graph::insert_way(std::vector<int> node_ids)
 {
+	edges.push_back(node_ids);
 }
 
-void Graph::addNode(int id, int lat, int lon)
+void Graph::connect(int from_id, int to_id)
 {
-	nodes.insert(std::pair<int, Node>(id, Node { id, lat, lon }));
+	auto from = vertices.find(from_id);
+	auto to = vertices.find(to_id);
+
+	if (from != vertices.end() && to != vertices.end()) {
+		it->edges.push_back(Edge { distance(*from, *to), *to });
+	}
 }
 
-void Graph::addWay(int id, std::vector<int> node_ids)
+double distance(const Vertex* from, const Vertex* to)
 {
-	ways.insert(std::pair<int, Way>(id, Way{ id, node_ids }));
+	// TODO implement
+	return 42;
 }
 
-Vertice Graph::create()
+Vertex Graph::get_vertex(int id)
 {
-	// TODO create Graph structure based on nodes and ways
-	return Vertice();
+	return vertices.find(id);
+}
+
+int main()
+{
+	std::cout << "Hello, world" << "\n";
 }

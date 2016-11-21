@@ -2,15 +2,16 @@
 
 #include "graph.h"
 
-class routing
+class Routing
 {
 private:
 	int _counter;
 	
 
 public:
-	routing() : _counter{0} {};
-	~routing() {};
+	Routing() : _counter{0} {};
+	~Routing() {};
 
-	Graph createGraph();
+	void inc();
+	int get_counter();
 };
