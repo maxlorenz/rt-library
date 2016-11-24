@@ -12,7 +12,7 @@ let count = {
 osmread.parse({
     filePath: './test/monaco.osm.pbf',
 
-    bounds:(b) => count.bounds++,
+    bounds: (b) => count.bounds++,
     node: (n) => count.nodes++,
     way: (w) => count.ways++,
     relation: (r) => count.relations++,
