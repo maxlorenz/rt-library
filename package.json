@@ -4,6 +4,7 @@
   "description": "Green Navigation routing library",
   "main": "index.js",
   "scripts": {
+    "simple": "node ./simple-routing.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
