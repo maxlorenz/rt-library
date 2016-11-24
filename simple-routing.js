@@ -1,5 +1,15 @@
 let osmread = require("osm-read");
 
+osmread.parse({
+    filePath: './test/monaco.osm.pbf',
+
+    node: (n) => addNode(n),
+    way: (w) => addWay(w),
+
+    endDocument: () => demo(),
+    error: (msg) => console.log('error: ' + msg)
+});
+
 let cache = {
     nodes: {},
     ways: {}
@@ -51,81 +61,71 @@ function distanceInM(node1, node2) {
     return dist;
 }
 
-osmread.parse({
-    filePath: './test/monaco.osm.pbf',
+function findNodeWithShortestDistance(set) {
+    var distance = Infinity;
+    var shortestId = null;
+    for (var id in set) {
+        if (set[id].distance < distance) {
+            distance = set[id].distance;
+            shortestId = id;
+        }
+    }
 
-    node: (n) => addNode(n),
-    way: (w) => addWay(w),
+    return cache.nodes[shortestId];
+}
 
-    endDocument: () => demo(),
-    error: (msg) => console.log('error: ' + msg) 
-});
+function UCS(start, goal) {
+    var node;
+    var frontier = {};
+    var explored = {};
+    var maxSteps = 100000000;
 
- function findNodeWithShortestDistance(set) {
-     var distance = Infinity;
-     var shortestId = null;
-     for (var id in set) {
-         if (set[id].distance < distance) {
-             distance = set[id].distance;
-             shortestId = id;
-         }
-     }
+    node = start;
+    node.distance = 0;
+    frontier[node.id] = node;
 
-     return cache.nodes[shortestId];
- }
+    while (Object.keys(frontier).length > 0 && maxSteps > 0) {
+        node = findNodeWithShortestDistance(frontier);
+        delete frontier[node.id];
 
- function UCS(start, goal) {
-     var node;
-     var frontier = {};
-     var explored = {};
-     var maxSteps = 100000000;
+        if (node == goal) { // Draw found path
+            var latLng = [];
 
-     node = start;
-     node.distance = 0;
-     frontier[node.id] = node;
+            while (node.previous != undefined) {
+                latLng.push(node);
+                node = node.previous;
+            }
 
-     while (Object.keys(frontier).length > 0 && maxSteps > 0) {
-         node = findNodeWithShortestDistance(frontier);
-         delete frontier[node.id];
+            console.log("found a path in " + latLng.length + " nodes");
+            return;
+        }
 
-         if (node == goal) { // Draw found path
-             var latLng = [];
+        explored[node.id] = true;
 
-             while (node.previous != undefined) {
-                 latLng.push(node);
-                 node = node.previous;
-             }
+        getNextNodes(node).forEach(function (n) {
+            previous = node;
+            distance = distanceInM(node, n);
 
-             console.log(latLng);
-             return;
-         }
+            if (!(n.id in explored)) {
+                if (!(n.id in frontier)) {
+                    frontier[n.id] = n;
+                    frontier[n.id].previous = previous;
+                    frontier[n.id].distance = distance;
+                }
+                else if (frontier[n.id].distance > distance) {
+                    frontier[n.id].previous = previous;
+                    frontier[n.id].distance = distance;
+                }
+            }
+        });
 
-         explored[node.id] = true;
+        maxSteps--;
+    }
+}
 
-         getNextNodes(node).forEach(function (n) {
-             previous = node;
-             distance = distanceInM(node, n);
+function demo() {
+    var start = cache.nodes[25199246];
+    var goal = cache.nodes[25200449];
 
-             if (!(n.id in explored)) {
-                 if (!(n.id in frontier)) {
-                     frontier[n.id] = n;
-                     frontier[n.id].previous = previous;
-                     frontier[n.id].distance = distance;
-                 }
-                 else if (frontier[n.id].distance > distance) {
-                     frontier[n.id].previous = previous;
-                     frontier[n.id].distance = distance;
-                 }
-             }
-         });
-
-         maxSteps--;
-     }
- }
-
- function demo() {
-     var start = cache.nodes[25199246];
-     var goal = cache.nodes[25200449];
-
-     UCS(start, goal);
- }
+    UCS(start, goal);
+}
