@@ -1,0 +1,27 @@
+{
+  "name": "rt-library",
+  "version": "0.0.1",
+  "description": "Green Navigation routing library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Greennav/rt-library.git"
+  },
+  "keywords": [
+    "osm",
+    "greennav",
+    "routing"
+  ],
+  "author": "Green Navigation",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Greennav/rt-library/issues"
+  },
+  "homepage": "https://github.com/Greennav/rt-library#readme",
+  "dependencies": {
+    "osm-read": "^0.6.0"
+  }
+}
