@@ -1,45 +1,13 @@
-let osmread = require("osm-read");
+let loader = require("./lib/loader.js");
 
-osmread.parse({
-    filePath: './test/monaco.osm.pbf',
+module.exports.afterLoading = callback => {
+    loader.afterLoading(cache => {
+        module.exports.route = (start, goal, callback) => {
+            UCS(start, goal, cache, callback);
+        };
 
-    node: (n) => addNode(n),
-    way: (w) => addWay(w),
-
-    endDocument: () => demo(),
-    error: (msg) => console.log('error: ' + msg)
-});
-
-let cache = {
-    nodes: {},
-    ways: {}
-}
-
-function addNode(node) {
-    cache.nodes[node.id] = node;
-}
-
-function addWay(way) {
-    for (let i = 1; i < way.nodeRefs.length; i++) {
-        let lastNode = way.nodeRefs[i - 1];
-        let currentNode = way.nodeRefs[i];
-
-        if (!(lastNode in cache.ways)) {
-            cache.ways[lastNode] = {};
-        }
-
-        cache.ways[lastNode][currentNode] = true;
-    }
-}
-
-function getNextNodes(node) {
-    var nextNodes = [];
-
-    for (var id in cache.ways[node.id]) {
-        nextNodes.push(cache.nodes[id]);
-    }
-
-    return nextNodes;
+        callback();
+    });
 }
 
 function distanceInM(node1, node2) {
@@ -64,6 +32,7 @@ function distanceInM(node1, node2) {
 function findNodeWithShortestDistance(set) {
     var distance = Infinity;
     var shortestId = null;
+
     for (var id in set) {
         if (set[id].distance < distance) {
             distance = set[id].distance;
@@ -71,24 +40,24 @@ function findNodeWithShortestDistance(set) {
         }
     }
 
-    return cache.nodes[shortestId];
+    return shortestId;
 }
 
-function UCS(start, goal) {
-    var node;
+function UCS(startId, goalId, cache, callback) {
+    var node = cache.nodes[startId];
     var frontier = {};
     var explored = {};
-    var maxSteps = 100000000;
+    var maxSteps = 9999999;
 
-    node = start;
     node.distance = 0;
     frontier[node.id] = node;
 
     while (Object.keys(frontier).length > 0 && maxSteps > 0) {
-        node = findNodeWithShortestDistance(frontier);
-        delete frontier[node.id];
+        nodeId = findNodeWithShortestDistance(frontier);
+        node = cache.nodes[nodeId];
+        delete frontier[nodeId];
 
-        if (node == goal) { // Draw found path
+        if (nodeId == goalId) {
             var latLng = [];
 
             while (node.previous != undefined) {
@@ -96,13 +65,12 @@ function UCS(start, goal) {
                 node = node.previous;
             }
 
-            console.log("found a path in " + latLng.length + " nodes");
-            return;
+            callback(latLng);
         }
 
         explored[node.id] = true;
 
-        getNextNodes(node).forEach(function (n) {
+        cache.getNextNodes(node, n => {
             previous = node;
             distance = distanceInM(node, n);
 
@@ -121,11 +89,4 @@ function UCS(start, goal) {
 
         maxSteps--;
     }
-}
-
-function demo() {
-    var start = cache.nodes[25199246];
-    var goal = cache.nodes[25200449];
-
-    UCS(start, goal);
 }
