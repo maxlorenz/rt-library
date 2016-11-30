@@ -1,11 +1,16 @@
-let express = require("express")
-let ucs = require("./ucs");
+var express = require("express");
+var ucs = require("./ucs");
 
 
 console.log ("Loading OSM data...");
 
 ucs.afterLoading(() => {
-    let app = express()
+    var app = express();
+
+    app.use((req, res, next) => {
+    	res.header('Access-Control-Allow-Origin', '*');
+    	next();
+    });
 
     app.get('/from/:fromId/to/:toId', (req, res) => {
         ucs.route(req.params.fromId, req.params.toId, path => {

@@ -1,20 +1,22 @@
-let loader = require("./lib/loader.js");
+'use strict';
 
-module.exports.afterLoading = function(after) {
+var loader = require("./lib/loader.js");
+
+module.exports.afterLoading = after => {
     loader.afterLoading(cache => {
         module.exports.route = (start, goal, c) => UCS(start, goal, cache, c);
         after();
     });
 }
 
-function distanceInM(node1, node2) {
-    let radlat1 = Math.PI * node1.lat / 180;
-    let radlat2 = Math.PI * node2.lat / 180;
-    let radlon1 = Math.PI * node1.lon / 180;
-    let radlon2 = Math.PI * node2.lon / 180;
+let distanceInM = (node1, node2) => {
+    var radlat1 = Math.PI * node1.lat / 180;
+    var radlat2 = Math.PI * node2.lat / 180;
+    var radlon1 = Math.PI * node1.lon / 180;
+    var radlon2 = Math.PI * node2.lon / 180;
 
-    let theta = node1.lon - node2.lon;
-    let radtheta = Math.PI * theta / 180;
+    var theta = node1.lon - node2.lon;
+    var radtheta = Math.PI * theta / 180;
 
     var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
 
@@ -57,8 +59,8 @@ function backtrack(node) {
 }
 
 function addNextNodes(node, next, explored, frontier) {
-    let previous = node;
-    let distance = distanceInM(node, next);
+    var previous = node;
+    var distance = distanceInM(node, next);
 
     if (!(next.id in explored)) {
         if (!(next.id in frontier)) {
@@ -83,7 +85,7 @@ function UCS(startId, goalId, cache, callback) {
     frontier[node.id] = node;
 
     while (Object.keys(frontier).length > 0 && maxSteps > 0) {
-        nodeId = findNodeWithShortestDistance(frontier);
+        var nodeId = findNodeWithShortestDistance(frontier);
         node = cache.nodes[nodeId];
         delete frontier[nodeId];
 
