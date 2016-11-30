@@ -44,7 +44,12 @@ function backtrack(node) {
     var latLng = [];
 
     while (node.previous != undefined) {
-        latLng.push(node);
+        latLng.push({
+            lon: node.lon,
+            lat: node.lat,
+            tags: node.tags
+        });
+
         node = node.previous;
     }
 
