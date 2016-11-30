@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Greennav/rt-library#readme",
   "dependencies": {
+    "express": "^4.14.0",
     "osm-read": "^0.6.0"
   }
 }
