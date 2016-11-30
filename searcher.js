@@ -7,14 +7,14 @@ module.exports.searcher = (cache) => {
         }
     });
 
-    return keyword => addressResolver(keyword);
+    return addressResolver;
 };
 
 var matches = [];
 
-let addressResolver = (input) => {
-    let maxCount = 10;
-    let result = [];
+let addressResolver = (input, callback) => {
+    var maxCount = 10;
+    var result = [];
 
     for (var i = 0, len = matches.length; i < len && maxCount > 0; i++) {
         let line = matches[i];
@@ -30,7 +30,7 @@ let addressResolver = (input) => {
         }
     }
 
-    return result;
+    callback(result);
 };
 
 function addTags(node) {
