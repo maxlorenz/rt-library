@@ -1,23 +1,20 @@
 let loader = require("./lib/loader.js");
 
-module.exports.afterLoading = callback => {
+module.exports.afterLoading = function(after) {
     loader.afterLoading(cache => {
-        module.exports.route = (start, goal, callback) => {
-            UCS(start, goal, cache, callback);
-        };
-
-        callback();
+        module.exports.route = (start, goal, c) => UCS(start, goal, cache, c);
+        after();
     });
 }
 
 function distanceInM(node1, node2) {
-    var radlat1 = Math.PI * node1.lat / 180;
-    var radlat2 = Math.PI * node2.lat / 180;
-    var radlon1 = Math.PI * node1.lon / 180;
-    var radlon2 = Math.PI * node2.lon / 180;
+    let radlat1 = Math.PI * node1.lat / 180;
+    let radlat2 = Math.PI * node2.lat / 180;
+    let radlon1 = Math.PI * node1.lon / 180;
+    let radlon2 = Math.PI * node2.lon / 180;
 
-    var theta = node1.lon - node2.lon;
-    var radtheta = Math.PI * theta / 180;
+    let theta = node1.lon - node2.lon;
+    let radtheta = Math.PI * theta / 180;
 
     var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
 
