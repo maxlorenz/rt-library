@@ -40,6 +40,34 @@ function findNodeWithShortestDistance(set) {
     return shortestId;
 }
 
+function backtrack(node) {
+    var latLng = [];
+
+    while (node.previous != undefined) {
+        latLng.push(node);
+        node = node.previous;
+    }
+
+    return latLng;
+}
+
+function addNextNodes(node, next, explored, frontier) {
+    let previous = node;
+    let distance = distanceInM(node, next);
+
+    if (!(next.id in explored)) {
+        if (!(next.id in frontier)) {
+            frontier[next.id] = next;
+            frontier[next.id].previous = previous;
+            frontier[next.id].distance = distance;
+        }
+        else if (frontier[next.id].distance > distance) {
+            frontier[next.id].previous = previous;
+            frontier[next.id].distance = distance;
+        }
+    }
+}
+
 function UCS(startId, goalId, cache, callback) {
     var node = cache.nodes[startId];
     var frontier = {};
@@ -55,34 +83,11 @@ function UCS(startId, goalId, cache, callback) {
         delete frontier[nodeId];
 
         if (nodeId == goalId) {
-            var latLng = [];
-
-            while (node.previous != undefined) {
-                latLng.push(node);
-                node = node.previous;
-            }
-
-            callback(latLng);
+            callback(backtrack(node));
         }
 
         explored[node.id] = true;
-
-        cache.getNextNodes(node, n => {
-            previous = node;
-            distance = distanceInM(node, n);
-
-            if (!(n.id in explored)) {
-                if (!(n.id in frontier)) {
-                    frontier[n.id] = n;
-                    frontier[n.id].previous = previous;
-                    frontier[n.id].distance = distance;
-                }
-                else if (frontier[n.id].distance > distance) {
-                    frontier[n.id].previous = previous;
-                    frontier[n.id].distance = distance;
-                }
-            }
-        });
+        cache.getNextNodes(node, next => addNextNodes(node, next, explored, frontier));
 
         maxSteps--;
     }
