@@ -2,12 +2,10 @@
 
 var loader = require("./lib/loader.js");
 
-module.exports.afterLoading = after => {
-    loader.afterLoading(cache => {
-        module.exports.route = (start, goal, c) => UCS(start, goal, cache, c);
-        after();
-    });
-}
+module.exports.ucs = (cache) => {
+    var cache = cache;
+    return ((start, goal, callback) => UCS(cache, start, goal, callback));
+};
 
 let distanceInM = (node1, node2) => {
     var radlat1 = Math.PI * node1.lat / 180;
@@ -75,7 +73,7 @@ function addNextNodes(node, next, explored, frontier) {
     }
 }
 
-function UCS(startId, goalId, cache, callback) {
+function UCS(cache, startId, goalId, callback) {
     var node = cache.nodes[startId];
     var frontier = {};
     var explored = {};

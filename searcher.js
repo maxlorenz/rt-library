@@ -1,40 +1,37 @@
-let http = require('http');
-let osmread = require("osm-read");
+'use strict';
+
+module.exports.searcher = (cache) => {
+    Object.keys(cache.nodes).forEach(nodeId => {
+        addTags(cache.nodes[nodeId]);
+    });
+
+    return keyword => addressResolver(keyword);
+};
 
 var matches = [];
 
-let addressResolver = (req, res) => {
+let addressResolver = (input) => {
     let maxCount = 10;
-    let input = req.url.substr(1);
-    let result = {};
-
-    res.writeHead(200, {'Content-Type': 'text/json'});
+    let result = [];
 
     for (var i = 0, len = matches.length; i < len && maxCount > 0; i++) {
         let line = matches[i];
 
         if (line[0].includes(input)) {
-            result[line[0]] = line[1];
+            result.push({
+                display_name: line[0],
+                osm_id: line[1]
+            });
+
             maxCount--;
         }
     }
 
-    res.end(JSON.stringify(result));
+    return result;
 };
-
-function createServer() {
-    http.createServer(addressResolver).listen(6833);
-    console.log('Listening on localhost:6833');
-}
 
 function addTags(node) {
     Object.getOwnPropertyNames(node.tags).forEach(key => {
         matches.push([node.tags[key], node.id]);
     });
 }
-
-osmread.parse({
-    endDocument: () => createServer(),
-    filePath: './test/monaco.osm.pbf',
-    node: (n) => addTags(n)
-});
