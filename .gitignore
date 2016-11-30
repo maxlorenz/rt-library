@@ -1,5 +1,6 @@
 # editors
 .vs/
+.vscode/
 
 # Logs
 logs
