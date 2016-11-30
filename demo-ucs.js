@@ -21,7 +21,7 @@ loader.afterLoading(cache => {
     });
 
     app.get('/search/:keyword', (req, res) => {
-        res.json(search(req.params.keyword));
+        res.json(search(req.params.keyword.toLowerCase()));
     });
 });
 

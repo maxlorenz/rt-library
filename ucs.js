@@ -74,26 +74,36 @@ function addNextNodes(node, next, explored, frontier) {
 }
 
 function UCS(cache, startId, goalId, callback) {
-    var node = cache.nodes[startId];
+    var node = cache.getNode(startId);
     var frontier = {};
     var explored = {};
-    var maxSteps = 9999999;
+    var maxSteps = 10000000;
 
     node.distance = 0;
     frontier[node.id] = node;
 
     while (Object.keys(frontier).length > 0 && maxSteps > 0) {
         var nodeId = findNodeWithShortestDistance(frontier);
-        node = cache.nodes[nodeId];
+        node = cache.getNode(nodeId);
         delete frontier[nodeId];
 
         if (nodeId == goalId) {
+            console.log('path found. nodes visited: ' + Object.keys(explored).length);
             callback(backtrack(node));
+            return;
         }
 
         explored[node.id] = true;
         cache.getNextNodes(node, next => addNextNodes(node, next, explored, frontier));
 
         maxSteps--;
+
+        if (maxSteps % 1000 == 0) {
+            console.log('steps left: ' + maxSteps);
+        }
+
     }
+
+    callback({ error: 'No path was found after ' + Object.keys(explored).length + ' steps' });
+    return;
 }
