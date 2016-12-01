@@ -18,7 +18,7 @@ let addressResolver = (input, callback) => {
 
     for (var i = 0, len = matches.length; i < len && maxCount > 0; i++) {
         let line = matches[i];
-        var matcher = RegExp(".*" + input + ".*", "i");
+        let matcher = RegExp('.*' + input + '.*', 'i');
 
         if (matcher.test(line[0])) {
             result.push({

@@ -1,6 +1,6 @@
 'use strict';
 
-var express = require("express");
+var express = require('express');
 var ucs = require("./ucs");
 var searcher = require('./searcher');
 var loader = require('./lib/loader');
