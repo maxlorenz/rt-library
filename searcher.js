@@ -1,23 +1,26 @@
 'use strict';
 
 module.exports.searcher = (cache) => {
-    Object.keys(cache.nodes).forEach(nodeId => {
-        addTags(cache.nodes[nodeId]);
+    Object.keys(cache.ways).forEach(nodeId => {
+        if (nodeId in cache.nodes) {
+            addTags(cache.nodes[nodeId]);
+        }
     });
 
-    return keyword => addressResolver(keyword);
+    return addressResolver;
 };
 
 var matches = [];
 
-let addressResolver = (input) => {
-    let maxCount = 10;
-    let result = [];
+let addressResolver = (input, callback) => {
+    var maxCount = 10;
+    var result = [];
 
     for (var i = 0, len = matches.length; i < len && maxCount > 0; i++) {
         let line = matches[i];
+        let matcher = RegExp('.*' + input + '.*', 'i');
 
-        if (line[0].includes(input)) {
+        if (matcher.test(line[0])) {
             result.push({
                 display_name: line[0],
                 osm_id: line[1]
@@ -27,7 +30,7 @@ let addressResolver = (input) => {
         }
     }
 
-    return result;
+    callback(result);
 };
 
 function addTags(node) {

@@ -1,18 +1,17 @@
 'use strict';
 
-var express = require("express");
+var express = require('express');
 var ucs = require("./ucs");
 var searcher = require('./searcher');
 var loader = require('./lib/loader');
 
 var app = express();
-
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
 });
 
-loader.afterLoading(cache => {
+loader.afterLoading('./test/monaco.osm.pbf', cache => {
     var route = ucs.ucs(cache);
     var search = searcher.searcher(cache);
 
@@ -21,7 +20,7 @@ loader.afterLoading(cache => {
     });
 
     app.get('/search/:keyword', (req, res) => {
-        res.json(search(req.params.keyword));
+        search(req.params.keyword, results => res.json(results));
     });
 });
 

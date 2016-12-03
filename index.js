@@ -1,6 +1,6 @@
 'use strict';
 
-let osmread = require("osm-read");
+let osmread = require('osm-read');
 
 let count = {
     bounds: 0,
