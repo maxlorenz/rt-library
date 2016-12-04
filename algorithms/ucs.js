@@ -1,7 +1,6 @@
 'use strict';
 
-let loader = require('./lib/loader.js');
-let osmlib = require('./lib/osm-lib');
+let osmlib = require('../lib/osm-lib');
 
 module.exports.ucs = (cache) => {
     return (start, goal, callback) => UCS(cache, start, goal, callback);
