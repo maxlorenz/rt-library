@@ -6,14 +6,30 @@ module.exports.astar = (cache) => {
     return (start, goal, callback) => astar(cache, start, goal, callback);
 };
 
-function nodeWithSmallestF(set) {
+let nodeWithSmallestF = set => {
     var minNode = { f: Infinity };
     set.forEach(node => { if (node.f < minNode.f) { minNode = node }});
 
     return minNode;
 }
 
-function astar(cache, startId, goalId, callback) {
+let backtrack = node => {
+    var latLng = [];
+
+    while (node.parent != undefined) {
+        latLng.push({
+            lon: node.lon,
+            lat: node.lat,
+            tags: node.tags
+        });
+
+        node = node.parent;
+    }
+
+    return latLng;
+}
+
+let astar = (cache, startId, goalId, callback) => {
     let open = new Map();
     let closed = new Map();
     var found = false;
@@ -31,15 +47,15 @@ function astar(cache, startId, goalId, callback) {
         console.log(open.size);
 
         cache.getNextNodes(q, successor => {
-            let heuristic = osm.distanceInM(successor, goal);
+            successor.parent = q;
 
+            let heuristic = osm.distanceInM(successor, goal);
             successor.distance = q.distance + osm.distanceInM(successor, q);
             successor.f = successor.distance + heuristic;
-            successor.parent = q;
 
             if (successor.id == goalId) {
                 found = true;
-                callback(successor);
+                callback(backtrack(successor));
             }
 
             if (open.has(successor.id) && open.get(successor.id).f < successor.f) {
