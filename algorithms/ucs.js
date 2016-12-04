@@ -6,54 +6,7 @@ module.exports.ucs = (cache) => {
     return (start, goal, callback) => UCS(cache, start, goal, callback);
 };
 
-function findNodeWithShortestDistance(set) {
-    var distance = Infinity;
-    var shortestId = null;
-
-    for (var id in set) {
-        if (set[id].distance < distance) {
-            distance = set[id].distance;
-            shortestId = id;
-        }
-    }
-
-    return shortestId;
-}
-
-function backtrack(node) {
-    var latLng = [];
-
-    while (node.previous != undefined) {
-        latLng.push({
-            lon: node.lon,
-            lat: node.lat,
-            tags: node.tags
-        });
-
-        node = node.previous;
-    }
-
-    return latLng;
-}
-
-function addNextNodes(node, next, explored, frontier) {
-    var previous = node;
-    let distance = osmlib.distanceInM(node, next);
-
-    if (!(next.id in explored)) {
-        if (!(next.id in frontier)) {
-            frontier[next.id] = next;
-            frontier[next.id].previous = previous;
-            frontier[next.id].distance = distance;
-        }
-        else if (frontier[next.id].distance > distance) {
-            frontier[next.id].previous = previous;
-            frontier[next.id].distance = distance;
-        }
-    }
-}
-
-function UCS(cache, startId, goalId, callback) {
+let UCS = (cache, startId, goalId, callback) => {
     var node = cache.getNode(startId);
     var frontier = {};
     var explored = {};
@@ -69,7 +22,7 @@ function UCS(cache, startId, goalId, callback) {
 
         if (nodeId == goalId) {
             console.log('path found. nodes visited: ' + Object.keys(explored).length);
-            callback(backtrack(node));
+            callback(osm.backtrack(node));
             return;
         }
 
@@ -81,4 +34,35 @@ function UCS(cache, startId, goalId, callback) {
 
     callback({ error: 'No path was found after ' + Object.keys(explored).length + ' steps' });
     return;
+}
+
+let findNodeWithShortestDistance = set => {
+    var distance = Infinity;
+    var shortestId = null;
+
+    for (var id in set) {
+        if (set[id].distance < distance) {
+            distance = set[id].distance;
+            shortestId = id;
+        }
+    }
+
+    return shortestId;
+}
+
+let addNextNodes = (node, next, explored, frontier) => {
+    var parent = node;
+    let distance = osmlib.distanceInM(node, next);
+
+    if (!(next.id in explored)) {
+        if (!(next.id in frontier)) {
+            frontier[next.id] = next;
+            frontier[next.id].parent = parent;
+            frontier[next.id].distance = distance;
+        }
+        else if (frontier[next.id].distance > distance) {
+            frontier[next.id].parent = parent;
+            frontier[next.id].distance = distance;
+        }
+    }
 }
