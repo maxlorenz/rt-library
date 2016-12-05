@@ -7,20 +7,19 @@ module.exports.astar = (cache) => {
 };
 
 let astar = (cache, startId, goalId, callback) => {
+    let map = osm.openClosedMap();
     let goal = cache.getNode(goalId);
+
     var q = cache.getNode(startId);
     q.f = 0;
     q.distance = 0;
 
-    let closed = new Map();
-    let open = new Map();
-    open.set(q.id, q);
-
+    map.setOpen(q);
     var found = false;
 
-    while (open.size > 0) {
-        q = nodeWithSmallestF(open);
-        open.delete(q.id);
+    while (map.openSize() > 0) {
+        q = map.findOpen((res, test) => res.f < test.f);
+        map.deleteOpen(q);
 
         cache.getNextNodes(q, successor => {
             successor.parent = q;
@@ -34,25 +33,18 @@ let astar = (cache, startId, goalId, callback) => {
                 callback(osm.backtrack(successor));
             }
 
-            if (open.has(successor.id) && open.get(successor.id).f < successor.f) {
+            if (map.hasOpen(successor) && map.getOpen(successor).f < successor.f) {
                 // skip
-            } else if (closed.has(successor.id) && closed.get(successor.id).f < successor.f) {
+            } else if (map.hasClosed(successor) && map.getClosed(successor).f < successor.f) {
                 // skip
             } else {
-                open.set(successor.id, successor);
+                map.setOpen(successor);
             }
         });
 
         if (found) { return; }
-        closed.set(q.id, q);
+        map.setClosed(q.id, q);
     }
 
     callback({ error: 'No path was found after ' + closed.size + ' nodes' });
-}
-
-let nodeWithSmallestF = set => {
-    var minNode = { f: Infinity };
-    set.forEach(node => { if (node.f < minNode.f) { minNode = node }});
-
-    return minNode;
 }

@@ -8,56 +8,36 @@ module.exports.ucs = (cache) => {
 
 let UCS = (cache, startId, goalId, callback) => {
     var node = cache.getNode(startId);
-    var frontier = {};
-    var explored = {};
+    let map = osm.openClosedMap();
 
     node.distance = 0;
-    frontier[node.id] = node;
 
-    while (Object.keys(frontier).length > 0) {
-        var nodeId = findNodeWithShortestDistance(frontier);
-        node = frontier[nodeId];
-        delete frontier[nodeId];
+    map.setOpen(node);
 
-        if (nodeId == goalId) {
+    while (map.openSize() > 0) {
+        node = map.findOpen((res, test) => res.distance < test.distance);
+        map.deleteOpen(node);
+
+        if (node.id == goalId) {
             callback(osm.backtrack(node));
             return;
         }
 
-        explored[nodeId] = true;
-        cache.getNextNodes(node, next => addNextNodes(node, next, explored, frontier));
+        map.setClosed(node);
+
+        cache.getNextNodes(node, successor => {
+            successor.parent = node;
+            successor.distance = osm.distanceInM(node, successor);
+
+            if (map.hasClosed(successor)) {
+                // skip
+            } else if (!map.hasOpen(successor)) {
+                map.setOpen(successor);
+            } else if (map.getOpen(successor).distance < successor.distance) {
+                map.setOpen(successor);
+            }
+        });
     }
 
     callback({ error: 'No path was found after ' + Object.keys(explored).length + ' nodes' });
-}
-
-let findNodeWithShortestDistance = set => {
-    var distance = Infinity;
-    var shortestId = null;
-
-    for (var id in set) {
-        if (set[id].distance < distance) {
-            distance = set[id].distance;
-            shortestId = id;
-        }
-    }
-
-    return shortestId;
-}
-
-let addNextNodes = (node, next, explored, frontier) => {
-    var parent = node;
-    let distance = osm.distanceInM(node, next);
-
-    if (!(next.id in explored)) {
-        if (!(next.id in frontier)) {
-            frontier[next.id] = next;
-            frontier[next.id].parent = parent;
-            frontier[next.id].distance = distance;
-        }
-        else if (frontier[next.id].distance > distance) {
-            frontier[next.id].parent = parent;
-            frontier[next.id].distance = distance;
-        }
-    }
 }
