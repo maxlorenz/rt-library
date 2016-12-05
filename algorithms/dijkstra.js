@@ -2,49 +2,45 @@
 
 let osm = require('../lib/osm-lib');
 
-module.exports.astar = (cache) => {
-    return (start, goal, callback) => astar(cache, start, goal, callback);
+module.exports.dijkstra = (cache) => {
+    return (start, goal, callback) => dijkstra(cache, start, goal, callback);
 };
 
-let astar = (cache, startId, goalId, callback) => {
+let dijkstra = (cache, startId, goalId, callback) => {
     let map = osm.openClosedMap();
     let goal = cache.getNode(goalId);
 
     var q = cache.getNode(startId);
-    q.f = 0;
     q.distance = 0;
 
     map.setOpen(q);
     var found = false;
 
     while (map.openSize() > 0) {
-        q = map.findOpen((res, test) => res.f < test.f);
+        q = map.findOpen((res, test) => res.distance < test.distance);
         map.deleteOpen(q);
 
         cache.getNextNodes(q, successor => {
             successor.parent = q;
-
-            let heuristic = osm.distanceInM(successor, goal);
             successor.distance = q.distance + osm.distanceInM(successor, q);
-            successor.f = successor.distance + heuristic;
 
             if (successor.id == goalId) {
                 found = true;
                 callback(osm.backtrack(successor));
             }
 
-            if (map.hasOpen(successor) && map.getOpen(successor).f < successor.f) {
-                // skip
-            } else if (map.hasClosed(successor) && map.getClosed(successor).f < successor.f) {
+            if (map.hasOpen(successor) && map.getOpen(successor).distance < successor.distance) {
+                // current path to successor is longer
+            } else if (map.hasClosed(successor)) {
                 // skip
             } else {
                 map.setOpen(successor);
             }
         });
 
-        map.setClosed(q.id, q);
+        map.setClosed(q);
         if (found) { return; }
     }
 
-    callback({ error: 'No path was found after ' + map.closedSize() + ' nodes' });
+    callback({ error: 'No path was found after ' + map.openSize() + ' nodes' });
 }

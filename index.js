@@ -4,8 +4,8 @@
 let loader = require('./lib/loader');
 let searcher = require('./tools/searcher');
 
-let ucs = require('./algorithms/ucs');
 let astar = require('./algorithms/a-star');
+let dijkstra = require('./algorithms/dijkstra');
 
 // server
 let app = require('express')();
@@ -16,16 +16,17 @@ app.use((req, res, next) => {
 });
 
 loader.afterLoading('./example/monaco.osm.pbf', cache => {
-    var routeUcs = ucs.ucs(cache);
     var routeAstar = astar.astar(cache);
-    var search = searcher.searcher(cache);
+    var routeDijkstra = dijkstra.dijkstra(cache);
 
-    app.get('/ucs/from/:fromId/to/:toId', (req, res) => {
-        routeUcs(req.params.fromId, req.params.toId, path => res.json(path));
-    });
+    var search = searcher.searcher(cache);
 
     app.get('/astar/from/:fromId/to/:toId', (req, res) => {
         routeAstar(req.params.fromId, req.params.toId, path => res.json(path));
+    });
+    
+    app.get('/dijkstra/from/:fromId/to/:toId', (req, res) => {
+        routeDijkstra(req.params.fromId, req.params.toId, path => res.json(path));
     });
 
     app.get('/search/:keyword', (req, res) => {
