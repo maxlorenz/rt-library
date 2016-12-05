@@ -46,6 +46,8 @@ let astar = (cache, startId, goalId, callback) => {
         if (found) { return; }
         closed.set(q.id, q);
     }
+
+    callback({ error: 'No path was found after ' + closed.size + ' nodes' });
 }
 
 let nodeWithSmallestF = set => {

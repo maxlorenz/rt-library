@@ -1,6 +1,6 @@
 'use strict';
 
-let osmlib = require('../lib/osm-lib');
+let osm = require('../lib/osm-lib');
 
 module.exports.ucs = (cache) => {
     return (start, goal, callback) => UCS(cache, start, goal, callback);
@@ -10,30 +10,25 @@ let UCS = (cache, startId, goalId, callback) => {
     var node = cache.getNode(startId);
     var frontier = {};
     var explored = {};
-    var maxSteps = 10000000;
 
     node.distance = 0;
     frontier[node.id] = node;
 
-    while (Object.keys(frontier).length > 0 && maxSteps > 0) {
+    while (Object.keys(frontier).length > 0) {
         var nodeId = findNodeWithShortestDistance(frontier);
-        node = cache.getNode(nodeId);
+        node = frontier[nodeId];
         delete frontier[nodeId];
 
         if (nodeId == goalId) {
-            console.log('path found. nodes visited: ' + Object.keys(explored).length);
             callback(osm.backtrack(node));
             return;
         }
 
         explored[nodeId] = true;
         cache.getNextNodes(node, next => addNextNodes(node, next, explored, frontier));
-
-        maxSteps--;
     }
 
-    callback({ error: 'No path was found after ' + Object.keys(explored).length + ' steps' });
-    return;
+    callback({ error: 'No path was found after ' + Object.keys(explored).length + ' nodes' });
 }
 
 let findNodeWithShortestDistance = set => {
@@ -52,7 +47,7 @@ let findNodeWithShortestDistance = set => {
 
 let addNextNodes = (node, next, explored, frontier) => {
     var parent = node;
-    let distance = osmlib.distanceInM(node, next);
+    let distance = osm.distanceInM(node, next);
 
     if (!(next.id in explored)) {
         if (!(next.id in frontier)) {
