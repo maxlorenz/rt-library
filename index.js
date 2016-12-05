@@ -35,6 +35,6 @@ loader.afterLoading('./example/monaco.osm.pbf', cache => {
 });
 
 console.log('Listening on localhost:6833');
-console.log('Try http://localhost:6833/from/25199246/to/25200449');
+console.log('Try http://localhost:6833/astar/from/25199246/to/25200449');
 
 app.listen(6833);
